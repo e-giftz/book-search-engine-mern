@@ -26,7 +26,7 @@ const resolvers = {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
             if (!user) {
-                throw new AuthenticationError('Incorrect credentials')
+                throw new AuthenticationError('No user found with this email address')
             }
             const correctPw = await user.isCorrectPassword(password);
             if (!correctPw) {
@@ -41,7 +41,7 @@ const resolvers = {
             if (context.user) {
                 const updatedUser = await User.findByIdAndUpdate (
                     { _id: context.user._id },
-                    { $push: { savedBooks: input } },
+                    { $push: { savedBooks: bookData } },
                     { new: true }
                 );
                 return updatedUser;

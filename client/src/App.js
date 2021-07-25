@@ -9,7 +9,6 @@ import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
   uri: '/graphql',
-  cache: new InMemoryCache(),
   request: operation => {
     const token = localStorage.getItem('id_token');
 

@@ -13,9 +13,13 @@ const LoginForm = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    setUserFormData({ 
+      ...userFormData, 
+      [name]: value,
+     });
   };
 
+  // Submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -40,7 +44,7 @@ const LoginForm = () => {
     }
 
     setUserFormData({
-      username: '',
+      //username: '',
       email: '',
       password: '',
     });
