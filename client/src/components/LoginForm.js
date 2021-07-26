@@ -31,11 +31,10 @@ const LoginForm = () => {
     }
 
     try {
-
       const { data } = await login({
-        variables: {...userFormData} 
+        variables: {...userFormData } 
       });
-
+      console.log(data);
       Auth.login(data.login.token);
     } 
     catch (err) {
@@ -44,7 +43,7 @@ const LoginForm = () => {
     }
 
     setUserFormData({
-      //username: '',
+      username: '',
       email: '',
       password: '',
     });
