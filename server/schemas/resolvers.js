@@ -4,12 +4,14 @@ const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
     Query: {
+        user: async (parent, { username }) => {
+            return User.findOne({ username });
+        },
         // Get user by the username
         me: async (parent, args, context) => {
             if (context.user) {
-                const userData = await User.findOne({ _id: context.user._id });
+                return User.findOne({ _id: context.user._id });
         
-                return userData; 
             }
             throw new AuthenticationError('Not logged in');    
         },
@@ -27,9 +29,11 @@ const resolvers = {
         // Login
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
+            // If no  user withthat email address,
             if (!user) {
                 throw new AuthenticationError('No user found with this email address')
             }
+            // else if a user is found iwth the email address
             const correctPw = await user.isCorrectPassword(password);
             if (!correctPw) {
                 throw new AuthenticationError('Incorrect credentials');
@@ -41,9 +45,9 @@ const resolvers = {
         // Save books
         saveBook: async (parent, { bookData }, context) => {
             if (context.user) {
-                const updatedUser = await User.findByIdAndUpdate (
+                const updatedUser = await User.findOneAndUpdate (
                     { _id: context.user._id },
-                    { $push: { savedBooks: bookData } },
+                    { $addToSet: { savedBooks: bookData } },
                     { new: true, runValidators: true }
                 );
                 return updatedUser;
@@ -53,7 +57,7 @@ const resolvers = {
 
         removeBook: async (parent, { bookId }, context) => {
             if (context.user) {
-                const updatedUser = await User.findByIdAndUpdate (
+                const updatedUser = await User.findOneAndDelete(
                     { _id: context.user._id },
                     { $pull: { savedBooks: { bookId: bookId } } },
                     { new: true }
