@@ -22,4 +22,4 @@ Once the user is taken to the web page, they are able to search bookd via the se
 
 
 ## Screenshot  Demonstrating  the App's  Functionality
-![Budget Tracker](/assets/budget_tracker.png)
+![Google BookSearch](/assets/book_search_engine.png)
