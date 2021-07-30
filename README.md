@@ -18,7 +18,7 @@ Once the user is taken to the web page, they are able to search bookd via the se
 
 ## Links to application
 * URL of GitHub repository containing the code: https://github.com/e-giftz/book-search-engine-mern
-* URL of deployed app on heroku: https://fast-sierra-71282.herokuapp.com/
+* URL of deployed app on heroku:  https://secret-hollows-41741.herokuapp.com/
 
 
 ## Screenshot  Demonstrating  the App's  Functionality
